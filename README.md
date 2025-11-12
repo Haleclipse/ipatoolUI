@@ -2,6 +2,8 @@
 
 Native SwiftUI wrapper around [ipatool](https://github.com/majd/ipatool) that keeps every CLI feature one click away.
 
+<img width="901" height="656" alt="Screenshot 2025-11-12 alle 01 02 02" src="https://github.com/user-attachments/assets/d46f1738-c6d2-4df5-b101-802a1d63ff0f" />
+
 ## Features
 
 - Authenticate Apple IDs (login, info, revoke) with inline 2FA handling.
