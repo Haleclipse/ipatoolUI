@@ -1,0 +1,181 @@
+name: Build Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag (e.g., v1.0.0)'
+        required: false
+        default: 'dev'
+
+jobs:
+  build:
+    name: Build macOS App
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
+      - name: Get version
+        id: version
+        run: |
+          if [ "${{ github.event_name }}" = "push" ]; then
+            VERSION=${GITHUB_REF#refs/tags/}
+          else
+            VERSION=${{ github.event.inputs.version }}
+          fi
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "Building version: $VERSION"
+
+      - name: Build for ARM64
+        run: |
+          xcodebuild -project ipatoolUI.xcodeproj \
+            -scheme ipatoolUI \
+            -configuration Release \
+            -arch arm64 \
+            -derivedDataPath build/arm64 \
+            ONLY_ACTIVE_ARCH=NO \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            clean build
+
+      - name: Build for x86_64
+        run: |
+          xcodebuild -project ipatoolUI.xcodeproj \
+            -scheme ipatoolUI \
+            -configuration Release \
+            -arch x86_64 \
+            -derivedDataPath build/x86_64 \
+            ONLY_ACTIVE_ARCH=NO \
+            CODE_SIGN_IDENTITY="-" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            clean build
+
+      - name: Create Universal Binary
+        run: |
+          mkdir -p build/universal
+
+          ARM64_APP="build/arm64/Build/Products/Release/ipatoolUI.app"
+          X86_APP="build/x86_64/Build/Products/Release/ipatoolUI.app"
+          UNIVERSAL_APP="build/universal/ipatoolUI.app"
+
+          # Copy ARM64 app as base
+          cp -R "$ARM64_APP" "$UNIVERSAL_APP"
+
+          # Create universal binary using lipo
+          lipo -create \
+            "$ARM64_APP/Contents/MacOS/ipatoolUI" \
+            "$X86_APP/Contents/MacOS/ipatoolUI" \
+            -output "$UNIVERSAL_APP/Contents/MacOS/ipatoolUI"
+
+          # Verify universal binary
+          echo "Universal binary architectures:"
+          lipo -info "$UNIVERSAL_APP/Contents/MacOS/ipatoolUI"
+
+      - name: Create DMG for Universal
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+          DMG_NAME="ipatoolUI-${VERSION}-universal.dmg"
+
+          # Create temporary directory for DMG contents
+          mkdir -p dmg_contents
+          cp -R build/universal/ipatoolUI.app dmg_contents/
+          ln -s /Applications dmg_contents/Applications
+
+          # Create DMG
+          hdiutil create -volname "ipatoolUI" \
+            -srcfolder dmg_contents \
+            -ov -format UDZO \
+            "$DMG_NAME"
+
+          rm -rf dmg_contents
+          echo "Created: $DMG_NAME"
+
+      - name: Create DMG for ARM64
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+          DMG_NAME="ipatoolUI-${VERSION}-arm64.dmg"
+
+          mkdir -p dmg_contents
+          cp -R build/arm64/Build/Products/Release/ipatoolUI.app dmg_contents/
+          ln -s /Applications dmg_contents/Applications
+
+          hdiutil create -volname "ipatoolUI" \
+            -srcfolder dmg_contents \
+            -ov -format UDZO \
+            "$DMG_NAME"
+
+          rm -rf dmg_contents
+          echo "Created: $DMG_NAME"
+
+      - name: Create DMG for x86_64
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+          DMG_NAME="ipatoolUI-${VERSION}-x86_64.dmg"
+
+          mkdir -p dmg_contents
+          cp -R build/x86_64/Build/Products/Release/ipatoolUI.app dmg_contents/
+          ln -s /Applications dmg_contents/Applications
+
+          hdiutil create -volname "ipatoolUI" \
+            -srcfolder dmg_contents \
+            -ov -format UDZO \
+            "$DMG_NAME"
+
+          rm -rf dmg_contents
+          echo "Created: $DMG_NAME"
+
+      - name: Generate checksums
+        run: |
+          VERSION=${{ steps.version.outputs.version }}
+          echo "## SHA256 Checksums" > checksums.txt
+          echo "" >> checksums.txt
+          shasum -a 256 ipatoolUI-${VERSION}-*.dmg >> checksums.txt
+          cat checksums.txt
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: ipatoolUI-${{ steps.version.outputs.version }}
+          path: |
+            *.dmg
+            checksums.txt
+          retention-days: 30
+
+      - name: Create Release
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            *.dmg
+            checksums.txt
+          body: |
+            ## Downloads
+
+            | File | Architecture |
+            |------|-------------|
+            | `ipatoolUI-${{ steps.version.outputs.version }}-universal.dmg` | Universal (Apple Silicon + Intel) |
+            | `ipatoolUI-${{ steps.version.outputs.version }}-arm64.dmg` | Apple Silicon (M1/M2/M3) |
+            | `ipatoolUI-${{ steps.version.outputs.version }}-x86_64.dmg` | Intel |
+
+            ## Requirements
+            - macOS 13.0 or later
+            - [ipatool](https://github.com/majd/ipatool) installed (`brew install ipatool`)
+
+            ## Checksums
+            See `checksums.txt` for SHA256 verification.
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
