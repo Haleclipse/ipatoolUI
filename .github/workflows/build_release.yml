@@ -151,13 +151,35 @@ jobs:
           shasum -a 256 ipatoolUI-${VERSION}-*.dmg >> checksums.txt
           cat checksums.txt
 
-      - name: Upload artifacts
+      - name: Upload Universal DMG
         uses: actions/upload-artifact@v4
         with:
-          name: ipatoolUI-${{ steps.version.outputs.version }}
-          path: |
-            *.dmg
-            checksums.txt
+          name: ipatoolUI-${{ steps.version.outputs.version }}-universal
+          path: ipatoolUI-${{ steps.version.outputs.version }}-universal.dmg
+          compression-level: 0
+          retention-days: 30
+
+      - name: Upload ARM64 DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: ipatoolUI-${{ steps.version.outputs.version }}-arm64
+          path: ipatoolUI-${{ steps.version.outputs.version }}-arm64.dmg
+          compression-level: 0
+          retention-days: 30
+
+      - name: Upload x86_64 DMG
+        uses: actions/upload-artifact@v4
+        with:
+          name: ipatoolUI-${{ steps.version.outputs.version }}-x86_64
+          path: ipatoolUI-${{ steps.version.outputs.version }}-x86_64.dmg
+          compression-level: 0
+          retention-days: 30
+
+      - name: Upload checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: checksums
+          path: checksums.txt
           retention-days: 30
 
       - name: Create Release
