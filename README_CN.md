@@ -1,6 +1,6 @@
-[English](README.md)
-
 # ipatoolUI
+
+[English](README.md) | **中文**
 
 [ipatool](https://github.com/majd/ipatool) 的原生 SwiftUI 封装，让所有 CLI 功能触手可及。
 

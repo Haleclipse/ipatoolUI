@@ -1,6 +1,6 @@
-[中文](README_CN.md)
-
 # ipatoolUI
+
+**English** | [中文](README_CN.md)
 
 Native SwiftUI wrapper around [ipatool](https://github.com/majd/ipatool) that keeps every CLI feature one click away.
 
