@@ -10,6 +10,13 @@ on:
         description: 'Version tag (e.g., v1.0.0)'
         required: false
         default: 'dev'
+      create_release:
+        description: 'Create GitHub Release'
+        type: boolean
+        default: true
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -154,9 +161,11 @@ jobs:
           retention-days: 30
 
       - name: Create Release
-        if: startsWith(github.ref, 'refs/tags/')
-        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/') || (github.event_name == 'workflow_dispatch' && github.event.inputs.create_release == 'true')
+        uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: ${{ steps.version.outputs.version }}
           files: |
             *.dmg
             checksums.txt
@@ -176,6 +185,7 @@ jobs:
             ## Checksums
             See `checksums.txt` for SHA256 verification.
           draft: false
-          prerelease: false
+          prerelease: ${{ !startsWith(github.ref, 'refs/tags/') }}
+          generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
