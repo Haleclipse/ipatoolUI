@@ -1,0 +1,128 @@
+/* Feature Titles */
+"feature.auth" = "Authentication";
+"feature.search" = "Search";
+"feature.purchase" = "Purchase";
+"feature.versions" = "Versions";
+"feature.download" = "Download";
+"feature.metadata" = "Version Metadata";
+"feature.logs" = "Logs";
+"feature.settings" = "Settings";
+"feature.about" = "About";
+
+/* Common */
+"common.status" = "Status";
+"common.error" = "Error";
+"common.copy" = "Copy";
+"common.clear" = "Clear";
+"common.search" = "Search";
+"common.unknown" = "Unknown";
+
+/* Auth View */
+"auth.appleId" = "Apple ID";
+"auth.email" = "Email";
+"auth.password" = "Password";
+"auth.2faCode" = "2FA Code (optional)";
+"auth.actions" = "Actions";
+"auth.signIn" = "Sign In";
+"auth.accountInfo" = "Account Info";
+"auth.revoke" = "Revoke";
+"auth.notAuthenticated" = "Not authenticated";
+"auth.signedInAs %@" = "Signed in as %@";
+"auth.activeSession %@" = "Active session: %@";
+"auth.credentialsRevoked" = "Credentials revoked";
+"auth.emailPasswordRequired" = "Email and password are required.";
+
+/* Search View */
+"search.title" = "Search";
+"search.searchTerm" = "Search term";
+"search.limit %lld" = "Limit: %lld";
+"search.version %@" = "Version %@";
+"search.id %lld" = "ID: %lld";
+"search.copyBundleId" = "Copy Bundle ID";
+"search.purchased" = "Purchased";
+"search.purchase" = "Purchase";
+"search.fetched %lld" = "Fetched %lld app(s).";
+"search.enterTerm" = "Enter a search term.";
+"search.purchaseSucceeded %@" = "Purchase succeeded for %@.";
+"search.commandFinished" = "Command finished but success flag missing.";
+"search.verifyOwnershipFailed" = "Couldn't verify ownership. Check your network connection and try again.";
+
+/* Purchase View */
+"purchase.app" = "App";
+"purchase.bundleIdentifier" = "Bundle Identifier";
+"purchase.purchaseLicense" = "Purchase License";
+"purchase.succeeded %@" = "Purchase succeeded for %@.";
+"purchase.missingBundleId" = "Please enter a bundle identifier.";
+
+/* Download View */
+"download.targetApp" = "Target App";
+"download.appId" = "App ID";
+"download.externalVersionId" = "External Version ID";
+"download.output" = "Output";
+"download.destinationPath" = "Destination path";
+"download.choose" = "Choose…";
+"download.autoPurchase" = "Automatically purchase license if needed";
+"download.downloadIpa" = "Download IPA";
+"download.selectDestination" = "Select Destination";
+"download.downloaded %@" = "%@ downloaded";
+"download.succeeded %@" = "Download succeeded: %@";
+"download.enterAppIdOrBundle" = "Provide either an App ID or Bundle Identifier.";
+"download.enterDestination" = "Choose a destination path for the IPA file.";
+
+/* Versions View */
+"versions.targetApp" = "Target App";
+"versions.appId" = "App ID";
+"versions.bundleId" = "Bundle ID";
+"versions.listVersions" = "List Versions";
+"versions.loadingVersion" = "Loading version…";
+"versions.fetched %lld" = "Fetched %lld version(s).";
+"versions.provideAppIdOrBundle" = "Provide either an App ID or Bundle Identifier.";
+
+/* Version Metadata View */
+"metadata.lookup" = "Lookup";
+"metadata.externalVersionId" = "External Version ID";
+"metadata.fetchMetadata" = "Fetch Metadata";
+"metadata.result" = "Result";
+"metadata.version %@" = "Version: %@";
+"metadata.externalId %@" = "External ID: %@";
+"metadata.released %@" = "Released: %@";
+"metadata.provideVersionId" = "Provide an external version ID.";
+"metadata.provideAppIdOrBundle" = "Provide either an App ID or Bundle Identifier.";
+
+/* Logs View */
+"logs.recentCommands" = "Recent Commands";
+"logs.success" = "Success";
+"logs.failure %d" = "Failure (code %d)";
+"logs.output" = "Output";
+"logs.errors" = "Errors";
+
+/* Settings View */
+"settings.ipatoolBinary" = "ipatool Binary";
+"settings.pathToIpatool" = "Path to ipatool";
+"settings.browse" = "Browse…";
+"settings.autoDetect" = "Auto-Detect";
+"settings.detectedAt %@" = "Detected at %@.";
+"settings.unableToLocate" = "Unable to locate ipatool. Install it via Homebrew first.";
+"settings.using %@" = "Using %@";
+"settings.behavior" = "Behavior";
+"settings.nonInteractive" = "Non-interactive";
+"settings.verboseLogs" = "Verbose Logs";
+"settings.outputFormat" = "Output Format";
+"settings.keychainPassphrase" = "Keychain Passphrase";
+
+/* About View */
+"about.title" = "About ipatool UI";
+"about.description" = "ipatool UI wraps the open-source ipatool CLI to make App Store searches, downloads, and purchases easier on macOS.";
+"about.credits" = "Credits";
+"about.creditsDescription" = "All CLI functionality is provided by the ipatool project. Consider starring the repository or contributing fixes upstream.";
+"about.viewIpatoolOnGitHub" = "View ipatool on GitHub";
+"about.viewIpatoolUIOnGitHub" = "View ipatoolUI on GitHub";
+
+/* Install Hint View */
+"hint.notInstalled" = "ipatool is not installed on this Mac.";
+"hint.runCommand" = "Run the following command to install it:";
+
+/* Errors */
+"error.executableNotFound" = "ipatool executable could not be located. Update the path in Settings.";
+"error.decodingFailed" = "Failed to parse ipatool response. Enable verbose logs and try again.";
+"error.bundleIdMissing" = "App bundle identifier is missing.";

@@ -10,27 +10,27 @@ struct AuthView: View {
 
     var body: some View {
         Form {
-            Section("Apple ID") {
-                TextField("Email", text: $viewModel.email)
+            Section(String(localized: "auth.appleId")) {
+                TextField(String(localized: "auth.email"), text: $viewModel.email)
                     .textContentType(.username)
                     .autocorrectionDisabled()
-                SecureField("Password", text: $viewModel.password)
-                TextField("2FA Code (optional)", text: $viewModel.authCode)
+                SecureField(String(localized: "auth.password"), text: $viewModel.password)
+                TextField(String(localized: "auth.2faCode"), text: $viewModel.authCode)
                     .textFieldStyle(.roundedBorder)
             }
 
-            Section("Actions") {
+            Section(String(localized: "auth.actions")) {
                 HStack {
-                    Button("Sign In", action: signIn)
+                    Button(String(localized: "auth.signIn"), action: signIn)
                         .disabled(viewModel.isWorking)
-                    Button("Account Info", action: fetchInfo)
+                    Button(String(localized: "auth.accountInfo"), action: fetchInfo)
                         .disabled(viewModel.isWorking)
-                    Button("Revoke", action: revoke)
+                    Button(String(localized: "auth.revoke"), action: revoke)
                         .disabled(viewModel.isWorking)
                 }
             }
 
-            Section("Status") {
+            Section(String(localized: "common.status")) {
                 Text(viewModel.statusMessage)
                     .font(.callout)
                 if viewModel.isWorking {

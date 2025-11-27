@@ -18,7 +18,7 @@ final class ListVersionsViewModel: ObservableObject {
 
     func fetch(using environment: CommandEnvironment) {
         guard validateInput() else {
-            activeError = .invalidInput("Provide an app ID or bundle identifier.")
+            activeError = .invalidInput(String(localized: "versions.provideAppIdOrBundle"))
             return
         }
 
@@ -45,7 +45,7 @@ final class ListVersionsViewModel: ObservableObject {
                 let payload: VersionsLogEvent = try environment.service.decodeEvent(VersionsLogEvent.self, from: result.stdout)
                 let identifiers = payload.externalVersionIdentifiers ?? []
                 self.versionItems = identifiers.map { VersionListItem(externalVersionID: $0, displayVersion: nil) }
-                self.statusMessage = "Found \(self.versionItems.count) version(s)."
+                self.statusMessage = String(localized: "versions.fetched \(self.versionItems.count)")
                 self.startMetadataFetch(
                     identifiers: identifiers,
                     appID: resolvedAppID,

@@ -1,0 +1,128 @@
+/* Feature Titles */
+"feature.auth" = "认证";
+"feature.search" = "搜索";
+"feature.purchase" = "购买";
+"feature.versions" = "版本";
+"feature.download" = "下载";
+"feature.metadata" = "版本元数据";
+"feature.logs" = "日志";
+"feature.settings" = "设置";
+"feature.about" = "关于";
+
+/* Common */
+"common.status" = "状态";
+"common.error" = "错误";
+"common.copy" = "复制";
+"common.clear" = "清除";
+"common.search" = "搜索";
+"common.unknown" = "未知";
+
+/* Auth View */
+"auth.appleId" = "Apple ID";
+"auth.email" = "邮箱";
+"auth.password" = "密码";
+"auth.2faCode" = "双重认证码 (可选)";
+"auth.actions" = "操作";
+"auth.signIn" = "登录";
+"auth.accountInfo" = "账户信息";
+"auth.revoke" = "撤销凭证";
+"auth.notAuthenticated" = "未认证";
+"auth.signedInAs %@" = "已登录：%@";
+"auth.activeSession %@" = "当前会话：%@";
+"auth.credentialsRevoked" = "凭据已撤销";
+"auth.emailPasswordRequired" = "需要输入邮箱和密码。";
+
+/* Search View */
+"search.title" = "搜索";
+"search.searchTerm" = "搜索关键词";
+"search.limit %lld" = "结果上限：%lld";
+"search.version %@" = "版本 %@";
+"search.id %lld" = "ID: %lld";
+"search.copyBundleId" = "复制 Bundle ID";
+"search.purchased" = "已购买";
+"search.purchase" = "购买";
+"search.fetched %lld" = "获取到 %lld 个应用。";
+"search.enterTerm" = "请输入搜索关键词。";
+"search.purchaseSucceeded %@" = "已成功购买 %@。";
+"search.commandFinished" = "命令已完成，但缺少成功标志。";
+"search.verifyOwnershipFailed" = "无法验证所有权。请检查网络连接后重试。";
+
+/* Purchase View */
+"purchase.app" = "应用";
+"purchase.bundleIdentifier" = "Bundle 标识符";
+"purchase.purchaseLicense" = "购买许可";
+"purchase.succeeded %@" = "已成功购买 %@。";
+"purchase.missingBundleId" = "请输入 Bundle 标识符。";
+
+/* Download View */
+"download.targetApp" = "目标应用";
+"download.appId" = "应用 ID";
+"download.externalVersionId" = "外部版本 ID";
+"download.output" = "输出";
+"download.destinationPath" = "目标路径";
+"download.choose" = "选择…";
+"download.autoPurchase" = "必要时自动购买许可";
+"download.downloadIpa" = "下载 IPA";
+"download.selectDestination" = "选择目标位置";
+"download.downloaded %@" = "已下载 %@";
+"download.succeeded %@" = "下载成功：%@";
+"download.enterAppIdOrBundle" = "请提供应用 ID 或 Bundle 标识符。";
+"download.enterDestination" = "请选择 IPA 文件的保存路径。";
+
+/* Versions View */
+"versions.targetApp" = "目标应用";
+"versions.appId" = "应用 ID";
+"versions.bundleId" = "Bundle ID";
+"versions.listVersions" = "获取版本列表";
+"versions.loadingVersion" = "正在加载版本…";
+"versions.fetched %lld" = "获取到 %lld 个版本。";
+"versions.provideAppIdOrBundle" = "请提供应用 ID 或 Bundle 标识符。";
+
+/* Version Metadata View */
+"metadata.lookup" = "查询";
+"metadata.externalVersionId" = "外部版本 ID";
+"metadata.fetchMetadata" = "获取元数据";
+"metadata.result" = "结果";
+"metadata.version %@" = "版本：%@";
+"metadata.externalId %@" = "外部 ID：%@";
+"metadata.released %@" = "发布时间：%@";
+"metadata.provideVersionId" = "请提供外部版本 ID。";
+"metadata.provideAppIdOrBundle" = "请提供应用 ID 或 Bundle 标识符。";
+
+/* Logs View */
+"logs.recentCommands" = "最近命令";
+"logs.success" = "成功";
+"logs.failure %d" = "失败（代码 %d）";
+"logs.output" = "输出";
+"logs.errors" = "错误";
+
+/* Settings View */
+"settings.ipatoolBinary" = "ipatool 可执行文件";
+"settings.pathToIpatool" = "ipatool 路径";
+"settings.browse" = "浏览…";
+"settings.autoDetect" = "自动检测";
+"settings.detectedAt %@" = "检测到：%@";
+"settings.unableToLocate" = "无法找到 ipatool。请先通过 Homebrew 安装。";
+"settings.using %@" = "使用 %@";
+"settings.behavior" = "行为";
+"settings.nonInteractive" = "非交互模式";
+"settings.verboseLogs" = "详细日志";
+"settings.outputFormat" = "输出格式";
+"settings.keychainPassphrase" = "钥匙串密码";
+
+/* About View */
+"about.title" = "关于 ipatool UI";
+"about.description" = "ipatool UI 封装了开源的 ipatool 命令行工具，让 macOS 上的 App Store 搜索、下载和购买更加便捷。";
+"about.credits" = "致谢";
+"about.creditsDescription" = "所有命令行功能均由 ipatool 项目提供。欢迎为仓库点星 (Star) 或贡献代码。";
+"about.viewIpatoolOnGitHub" = "在 GitHub 上查看 ipatool";
+"about.viewIpatoolUIOnGitHub" = "在 GitHub 上查看 ipatoolUI";
+
+/* Install Hint View */
+"hint.notInstalled" = "此 Mac 上未安装 ipatool。";
+"hint.runCommand" = "请运行以下命令安装：";
+
+/* Errors */
+"error.executableNotFound" = "找不到 ipatool 可执行文件。请在设置中更新路径。";
+"error.decodingFailed" = "解析 ipatool 响应失败。请启用详细日志后重试。";
+"error.bundleIdMissing" = "缺少应用的 Bundle 标识符。";

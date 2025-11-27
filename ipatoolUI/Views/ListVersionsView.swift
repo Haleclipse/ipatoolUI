@@ -14,15 +14,15 @@ struct ListVersionsView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            GroupBox("Target App") {
+            GroupBox(String(localized: "versions.targetApp")) {
                 Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
                     GridRow {
-                        Text("App ID")
+                        Text("versions.appId")
                         TextField("123456", text: $viewModel.appIDString)
                             .textFieldStyle(.roundedBorder)
                     }
                     GridRow {
-                        Text("Bundle ID")
+                        Text("versions.bundleId")
                         TextField("com.example.app", text: $viewModel.bundleIdentifier)
                             .textFieldStyle(.roundedBorder)
                     }
@@ -34,7 +34,7 @@ struct ListVersionsView: View {
                         if viewModel.isLoading {
                             ProgressView()
                         } else {
-                            Label("List Versions", systemImage: "list.number")
+                            Label(String(localized: "versions.listVersions"), systemImage: "list.number")
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -63,7 +63,7 @@ struct ListVersionsView: View {
                             Text(versionName)
                                 .font(.headline)
                         } else {
-                            Text("Loading version…")
+                            Text("versions.loadingVersion")
                                 .foregroundStyle(.secondary)
                                 .font(.headline)
                         }
@@ -72,7 +72,7 @@ struct ListVersionsView: View {
                             .foregroundStyle(.secondary)
                     }
                     Spacer()
-                    Button("Copy") {
+                    Button(String(localized: "common.copy")) {
                         copyToPasteboard(item.externalVersionID)
                     }
                     .buttonStyle(.bordered)

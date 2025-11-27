@@ -5,21 +5,21 @@ final class AuthViewModel: ObservableObject {
     @Published var email: String = ""
     @Published var password: String = ""
     @Published var authCode: String = ""
-    @Published var statusMessage: String = "Not authenticated"
+    @Published var statusMessage: String = String(localized: "auth.notAuthenticated")
     @Published var isWorking: Bool = false
     @Published var activeError: IpatoolError?
     private var hasBootstrapped = false
 
     func login(using environment: CommandEnvironment) {
         guard !email.isEmpty, !password.isEmpty else {
-            activeError = .invalidInput("Email and password are required.")
+            activeError = .invalidInput(String(localized: "auth.emailPasswordRequired"))
             return
         }
 
         perform(subcommand: buildLoginCommand(), environment: environment) { service, result in
             let payload: AuthLogEvent = try service.decodeEvent(AuthLogEvent.self, from: result.stdout)
             let accountEmail = payload.email ?? self.email
-            self.statusMessage = "Signed in as \(accountEmail)"
+            self.statusMessage = String(localized: "auth.signedInAs \(accountEmail)")
             self.email = accountEmail
             self.password = ""
             self.authCode = ""
@@ -30,9 +30,9 @@ final class AuthViewModel: ObservableObject {
     func fetchInfo(using environment: CommandEnvironment, showProgress: Bool = true, suppressErrors: Bool = false) {
         perform(subcommand: ["auth", "info"], environment: environment, showProgress: showProgress, suppressErrors: suppressErrors) { service, result in
             let payload: AuthLogEvent = try service.decodeEvent(AuthLogEvent.self, from: result.stdout)
-            let accountEmail = payload.email ?? "unknown"
-            self.statusMessage = "Active session: \(accountEmail)"
-            if accountEmail != "unknown" {
+            let accountEmail = payload.email ?? String(localized: "common.unknown")
+            self.statusMessage = String(localized: "auth.activeSession \(accountEmail)")
+            if payload.email != nil {
                 self.email = accountEmail
             }
         }
@@ -40,7 +40,7 @@ final class AuthViewModel: ObservableObject {
 
     func revoke(using environment: CommandEnvironment) {
         perform(subcommand: ["auth", "revoke"], environment: environment) { _, _ in
-            self.statusMessage = "Credentials revoked"
+            self.statusMessage = String(localized: "auth.credentialsRevoked")
         }
     }
 

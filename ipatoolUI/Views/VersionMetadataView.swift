@@ -10,13 +10,13 @@ struct VersionMetadataView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            GroupBox("Lookup") {
+            GroupBox(String(localized: "metadata.lookup")) {
                 VStack(alignment: .leading, spacing: 8) {
-                    TextField("External Version ID", text: $viewModel.externalVersionID)
+                    TextField(String(localized: "metadata.externalVersionId"), text: $viewModel.externalVersionID)
                         .textFieldStyle(.roundedBorder)
-                    TextField("App ID", text: $viewModel.appIDString)
+                    TextField(String(localized: "download.appId"), text: $viewModel.appIDString)
                         .textFieldStyle(.roundedBorder)
-                    TextField("Bundle Identifier", text: $viewModel.bundleIdentifier)
+                    TextField(String(localized: "purchase.bundleIdentifier"), text: $viewModel.bundleIdentifier)
                         .textFieldStyle(.roundedBorder)
                     HStack {
                         Spacer()
@@ -24,7 +24,7 @@ struct VersionMetadataView: View {
                             if viewModel.isLoading {
                                 ProgressView()
                             } else {
-                                Label("Fetch Metadata", systemImage: "info.circle")
+                                Label(String(localized: "metadata.fetchMetadata"), systemImage: "info.circle")
                             }
                         }
                         .buttonStyle(.borderedProminent)
@@ -34,13 +34,13 @@ struct VersionMetadataView: View {
             }
 
             if let details = viewModel.details {
-                GroupBox("Result") {
+                GroupBox(String(localized: "metadata.result")) {
                     VStack(alignment: .leading, spacing: 4) {
-                        Text("Version: \(details.displayVersion ?? "Unknown")")
-                        Text("External ID: \(details.externalVersionID ?? viewModel.externalVersionID)")
+                        Text("metadata.version \(details.displayVersion ?? String(localized: "common.unknown"))")
+                        Text("metadata.externalId \(details.externalVersionID ?? viewModel.externalVersionID)")
                             .font(.callout)
                         if let date = details.releaseDate {
-                            Text("Released: \(date.formatted(date: .abbreviated, time: .shortened))")
+                            Text("metadata.released \(date.formatted(date: .abbreviated, time: .shortened))")
                                 .font(.callout)
                         }
                     }

@@ -8,9 +8,9 @@ struct InstallIpatoolHintView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text("ipatool is not installed on this Mac.")
+            Text("hint.notInstalled")
                 .font(.callout)
-            Text("Run the following command to install it:")
+            Text("hint.runCommand")
                 .font(.footnote)
                 .foregroundStyle(.secondary)
             HStack {
@@ -19,7 +19,7 @@ struct InstallIpatoolHintView: View {
                     .padding(6)
                     .background(Color.secondary.opacity(0.1))
                     .cornerRadius(6)
-                Button("Copy") {
+                Button(String(localized: "common.copy")) {
                     copyCommand()
                 }
                 .buttonStyle(.bordered)

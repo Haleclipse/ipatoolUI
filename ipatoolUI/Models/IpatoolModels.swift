@@ -97,11 +97,11 @@ enum IpatoolError: LocalizedError, Identifiable {
     var errorDescription: String? {
         switch self {
         case .executableNotFound:
-            return "ipatool executable could not be located. Update the path in Settings."
+            return String(localized: "error.executableNotFound")
         case .commandFailed(let message):
             return message
         case .decodingFailed:
-            return "Failed to parse ipatool response. Enable verbose logs and try again."
+            return String(localized: "error.decodingFailed")
         case .invalidInput(let details):
             return details
         }

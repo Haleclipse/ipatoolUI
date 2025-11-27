@@ -9,12 +9,12 @@ struct SettingsView: View {
 
     var body: some View {
         Form {
-            Section("ipatool Binary") {
+            Section(String(localized: "settings.ipatoolBinary")) {
                 HStack {
-                    TextField("Path to ipatool", text: binding(\.ipatoolPath))
+                    TextField(String(localized: "settings.pathToIpatool"), text: binding(\.ipatoolPath))
                         .textFieldStyle(.roundedBorder)
-                    Button("Browse…", action: browseForExecutable)
-                    Button("Auto-Detect", action: autoDetect)
+                    Button(String(localized: "settings.browse"), action: browseForExecutable)
+                    Button(String(localized: "settings.autoDetect"), action: autoDetect)
                 }
                 if let message = detectionMessage {
                     Text(message)
@@ -23,15 +23,15 @@ struct SettingsView: View {
                 }
             }
 
-            Section("Behavior") {
-                Toggle("Non-interactive", isOn: binding(\.nonInteractive))
-                Toggle("Verbose Logs", isOn: binding(\.verboseLogs))
-                Picker("Output Format", selection: binding(\.outputFormat)) {
+            Section(String(localized: "settings.behavior")) {
+                Toggle(String(localized: "settings.nonInteractive"), isOn: binding(\.nonInteractive))
+                Toggle(String(localized: "settings.verboseLogs"), isOn: binding(\.verboseLogs))
+                Picker(String(localized: "settings.outputFormat"), selection: binding(\.outputFormat)) {
                     ForEach(Preferences.OutputFormat.allCases) { format in
                         Text(format.rawValue.uppercased()).tag(format)
                     }
                 }
-                SecureField("Keychain Passphrase", text: binding(\.keychainPassphrase))
+                SecureField(String(localized: "settings.keychainPassphrase"), text: binding(\.keychainPassphrase))
                     .textFieldStyle(.roundedBorder)
             }
         }
@@ -48,9 +48,9 @@ struct SettingsView: View {
     private func autoDetect() {
         if let detected = IpatoolService.autoDetectExecutablePath() {
             appState.preferences.ipatoolPath = detected
-            detectionMessage = "Detected at \(detected)."
+            detectionMessage = String(localized: "settings.detectedAt \(detected)")
         } else {
-            detectionMessage = "Unable to locate ipatool. Install it via Homebrew first."
+            detectionMessage = String(localized: "settings.unableToLocate")
         }
     }
 
@@ -62,7 +62,7 @@ struct SettingsView: View {
         panel.allowsMultipleSelection = false
         if panel.runModal() == .OK, let url = panel.url {
             appState.preferences.ipatoolPath = url.path
-            detectionMessage = "Using \(url.path)"
+            detectionMessage = String(localized: "settings.using \(url.path)")
         }
         #endif
     }

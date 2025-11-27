@@ -21,7 +21,7 @@ private var cachedAppName: String? {
 
     func download(using environment: CommandEnvironment) {
         guard validateInput() else {
-            activeError = .invalidInput("Provide an app ID or bundle identifier.")
+            activeError = .invalidInput(String(localized: "download.enterAppIdOrBundle"))
             return
         }
 
@@ -60,9 +60,9 @@ private var cachedAppName: String? {
                 let result = try await environment.service.execute(subcommand: command, environment: environment)
                 let payload: DownloadLogEvent = try environment.service.decodeEvent(DownloadLogEvent.self, from: result.stdout)
                 if let path = payload.output ?? self.outputPath.nonEmptyOrNil {
-                    self.statusMessage = "Saved to \(path)."
+                    self.statusMessage = String(localized: "download.succeeded \(path)")
                 } else {
-                    self.statusMessage = "Download finished."
+                    self.statusMessage = String(localized: "download.succeeded \(self.outputPath)")
                 }
             } catch let error as IpatoolError {
                 self.activeError = error
@@ -142,7 +142,6 @@ private var cachedAppName: String? {
         } catch {
             return nil
         }
-        return nil
     }
 
     func ensureSuggestedFilename() {

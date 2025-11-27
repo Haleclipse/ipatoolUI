@@ -20,27 +20,27 @@ struct DownloadView: View {
 
     var body: some View {
         Form {
-            Section("Target App") {
-                TextField("App ID", text: $viewModel.appIDString)
+            Section(String(localized: "download.targetApp")) {
+                TextField(String(localized: "download.appId"), text: $viewModel.appIDString)
                     .textFieldStyle(.roundedBorder)
-                TextField("Bundle Identifier", text: $viewModel.bundleIdentifier)
+                TextField(String(localized: "purchase.bundleIdentifier"), text: $viewModel.bundleIdentifier)
                     .textFieldStyle(.roundedBorder)
-                TextField("External Version ID", text: $viewModel.externalVersionID)
+                TextField(String(localized: "download.externalVersionId"), text: $viewModel.externalVersionID)
                     .textFieldStyle(.roundedBorder)
             }
 
-            Section("Output") {
+            Section(String(localized: "download.output")) {
                 HStack {
-                    TextField("Destination path", text: $viewModel.outputPath)
+                    TextField(String(localized: "download.destinationPath"), text: $viewModel.outputPath)
                         .textFieldStyle(.roundedBorder)
-                    Button("Choose…", action: browseForOutput)
+                    Button(String(localized: "download.choose"), action: browseForOutput)
                 }
-                Toggle("Automatically purchase license if needed", isOn: $viewModel.shouldAutoPurchase)
+                Toggle(String(localized: "download.autoPurchase"), isOn: $viewModel.shouldAutoPurchase)
             }
 
             Section {
                 Button(action: download) {
-                    Label("Download IPA", systemImage: "arrow.down.circle")
+                    Label(String(localized: "download.downloadIpa"), systemImage: "arrow.down.circle")
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(viewModel.isDownloading)
@@ -61,14 +61,14 @@ struct DownloadView: View {
             }
 
             if let status = viewModel.statusMessage {
-                Section("Status") {
+                Section(String(localized: "common.status")) {
                     Text(status)
                         .font(.callout)
                 }
             }
 
             if let error = viewModel.activeError {
-                Section("Error") {
+                Section(String(localized: "common.error")) {
                     switch error {
                     case .executableNotFound:
                         InstallIpatoolHintView()
@@ -92,7 +92,7 @@ struct DownloadView: View {
             let totalString = Self.sizeFormatter.string(fromByteCount: total)
             return "\(downloaded) / \(totalString)"
         }
-        return "\(downloaded) downloaded"
+        return String(localized: "download.downloaded \(downloaded)")
     }
 
     private func browseForOutput() {
@@ -113,7 +113,7 @@ struct DownloadView: View {
             panel.allowedFileTypes = ["ipa"]
         }
         panel.nameFieldStringValue = viewModel.suggestedFilename
-        panel.title = "Select Destination"
+        panel.title = String(localized: "download.selectDestination")
         if panel.runModal() == .OK, let url = panel.url {
             viewModel.outputPath = url.path
         }

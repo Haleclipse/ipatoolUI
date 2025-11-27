@@ -17,8 +17,6 @@
 		2A6EDF072BF2FD1F00FAA848 /* VersionMetadataView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EDE872BF2FCBD00FAA848 /* VersionMetadataView.swift */; };
 		2A6EDF082BF2FD1F00FAA848 /* LogsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EDE882BF2FCBD00FAA848 /* LogsView.swift */; };
 		2A6EDF092BF2FD1F00FAA848 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EDE892BF2FCBD00FAA848 /* SettingsView.swift */; };
-		2A6EDF162BF301D900FAA848 /* InstallIpatoolHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EDF152BF301D900FAA848 /* InstallIpatoolHintView.swift */; };
-		2A6EDF192BF30A3F00FAA848 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EDF182BF30A3F00FAA848 /* AboutView.swift */; };
 		2A6EDF0A2BF2FD1F00FAA848 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EDE8A2BF2FCBD00FAA848 /* AppState.swift */; };
 		2A6EDF0B2BF2FD1F00FAA848 /* IpatoolModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EDE8B2BF2FCBD00FAA848 /* IpatoolModels.swift */; };
 		2A6EDF0C2BF2FD1F00FAA848 /* CommandLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EDE8C2BF2FCBD00FAA848 /* CommandLogger.swift */; };
@@ -31,6 +29,10 @@
 		2A6EDF132BF2FD1F00FAA848 /* VersionMetadataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EDE932BF2FCBD00FAA848 /* VersionMetadataViewModel.swift */; };
 		2A6EDF142BF2FD1F00FAA848 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A6EDE942BF2FCBD00FAA848 /* Assets.xcassets */; };
 		2A6EDF152BF2FD1F00FAA848 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2A6EDE952BF2FCBD00FAA848 /* Preview Assets.xcassets */; };
+		2A6EDF162BF301D900FAA848 /* InstallIpatoolHintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EDF152BF301D900FAA848 /* InstallIpatoolHintView.swift */; };
+		2A6EDF192BF30A3F00FAA848 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A6EDF182BF30A3F00FAA848 /* AboutView.swift */; };
+		F70BEB672ED885CD00549593 /* zh-Hans.lproj in Resources */ = {isa = PBXBuildFile; fileRef = F70BEB652ED885CD00549593 /* zh-Hans.lproj */; };
+		F70BEB682ED885CD00549593 /* en.lproj in Resources */ = {isa = PBXBuildFile; fileRef = F70BEB662ED885CD00549593 /* en.lproj */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,8 +48,6 @@
 		2A6EDE872BF2FCBD00FAA848 /* VersionMetadataView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionMetadataView.swift; sourceTree = "<group>"; };
 		2A6EDE882BF2FCBD00FAA848 /* LogsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogsView.swift; sourceTree = "<group>"; };
 		2A6EDE892BF2FCBD00FAA848 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		2A6EDF152BF301D900FAA848 /* InstallIpatoolHintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallIpatoolHintView.swift; sourceTree = "<group>"; };
-		2A6EDF182BF30A3F00FAA848 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		2A6EDE8A2BF2FCBD00FAA848 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		2A6EDE8B2BF2FCBD00FAA848 /* IpatoolModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IpatoolModels.swift; sourceTree = "<group>"; };
 		2A6EDE8C2BF2FCBD00FAA848 /* CommandLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandLogger.swift; sourceTree = "<group>"; };
@@ -60,6 +60,10 @@
 		2A6EDE932BF2FCBD00FAA848 /* VersionMetadataViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionMetadataViewModel.swift; sourceTree = "<group>"; };
 		2A6EDE942BF2FCBD00FAA848 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2A6EDE952BF2FCBD00FAA848 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Preview Assets.xcassets"; path = "Preview Content/Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2A6EDF152BF301D900FAA848 /* InstallIpatoolHintView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallIpatoolHintView.swift; sourceTree = "<group>"; };
+		2A6EDF182BF30A3F00FAA848 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		F70BEB652ED885CD00549593 /* zh-Hans.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = "zh-Hans.lproj"; sourceTree = "<group>"; };
+		F70BEB662ED885CD00549593 /* en.lproj */ = {isa = PBXFileReference; lastKnownFileType = folder; path = en.lproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,14 +140,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		2A6EDF172BF3025B00FAA848 /* Components */ = {
-			isa = PBXGroup;
-			children = (
-				2A6EDF152BF301D900FAA848 /* InstallIpatoolHintView.swift */,
-			);
-			path = Components;
-			sourceTree = "<group>";
-		};
 		2A6EDE532BF2FB1E00FAA848 /* Services */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,6 +151,8 @@
 		2A6EDE542BF2FB1E00FAA848 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F70BEB662ED885CD00549593 /* en.lproj */,
+				F70BEB652ED885CD00549593 /* zh-Hans.lproj */,
 				2A6EDE942BF2FCBD00FAA848 /* Assets.xcassets */,
 				2A6EDE952BF2FCBD00FAA848 /* Preview Assets.xcassets */,
 			);
@@ -167,6 +165,14 @@
 				2A6EDE562BF2FB1E00FAA848 /* ipatoolUI.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		2A6EDF172BF3025B00FAA848 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				2A6EDF152BF301D900FAA848 /* InstallIpatoolHintView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -195,8 +201,9 @@
 		2A6EDE4E2BF2FB1E00FAA848 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1510;
-				LastUpgradeCheck = 1510;
+				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					2A6EDE622BF2FB1E00FAA848 = {
 						CreatedOnToolsVersion = 15.1;
@@ -209,6 +216,8 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
+				Base,
 			);
 			mainGroup = 2A6EDE4C2BF2FB1E00FAA848;
 			productRefGroup = 2A6EDE552BF2FB1E00FAA848 /* Products */;
@@ -225,7 +234,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F70BEB682ED885CD00549593 /* en.lproj in Resources */,
 				2A6EDF142BF2FD1F00FAA848 /* Assets.xcassets in Resources */,
+				F70BEB672ED885CD00549593 /* zh-Hans.lproj in Resources */,
 				2A6EDF152BF2FD1F00FAA848 /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,18 +295,22 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -310,7 +325,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-		MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -339,18 +354,22 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -359,7 +378,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-		MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -384,7 +403,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-		MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dave.ipatoolUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -410,7 +429,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-		MACOSX_DEPLOYMENT_TARGET = 15.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.dave.ipatoolUI;
 				PRODUCT_NAME = "$(TARGET_NAME)";

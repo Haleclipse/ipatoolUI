@@ -11,19 +11,21 @@ final class SearchViewModel: ObservableObject {
     @Published private(set) var artworkCache: [Int64: URL] = [:]
     @Published private(set) var purchasedKeys: Set<String> = []
     @Published private(set) var pendingPurchaseKeys: Set<String> = []
+    private var checkedKeys: Set<String> = []
 
     private let purchaseSemaphore = AsyncSemaphore(limit: 4)
 
     func search(using environment: CommandEnvironment) {
         let trimmed = term.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
-            activeError = .invalidInput("Enter a search term.")
+            activeError = .invalidInput(String(localized: "search.enterTerm"))
             return
         }
 
         isSearching = true
         activeError = nil
         feedback = nil
+        checkedKeys.removeAll()
 
         Task { [weak self] in
             guard let self else { return }
@@ -33,7 +35,7 @@ final class SearchViewModel: ObservableObject {
                 let result = try await environment.service.execute(subcommand: arguments, environment: environment)
                 let response: SearchLogEvent = try environment.service.decodeEvent(SearchLogEvent.self, from: result.stdout)
                 self.results = response.apps ?? []
-                self.feedback = "Fetched \(response.count ?? self.results.count) app(s)."
+                self.feedback = String(localized: "search.fetched \(response.count ?? self.results.count)")
                 self.scheduleArtworkFetch(for: self.results)
                 self.refreshPurchaseStatus(for: self.results, environment: environment)
             } catch let error as IpatoolError {
@@ -48,7 +50,7 @@ final class SearchViewModel: ObservableObject {
 
     func purchase(bundleID: String?, environment: CommandEnvironment) {
         guard let bundleID = bundleID, !bundleID.isEmpty else {
-            activeError = .invalidInput("App bundle identifier is missing.")
+            activeError = .invalidInput(String(localized: "error.bundleIdMissing"))
             return
         }
 
@@ -61,11 +63,11 @@ final class SearchViewModel: ObservableObject {
                 let result = try await environment.service.execute(subcommand: ["purchase", "--bundle-identifier", bundleID], environment: environment)
                 let payload: StatusLogEvent = try environment.service.decodeEvent(StatusLogEvent.self, from: result.stdout)
                 if payload.success == true {
-                    self.feedback = "Purchase succeeded for \(bundleID)."
+                    self.feedback = String(localized: "search.purchaseSucceeded \(bundleID)")
                     let key = self.purchaseKey(forBundle: bundleID)
                     self.purchasedKeys.insert(key)
                 } else {
-                    self.feedback = "Command finished but success flag missing."
+                    self.feedback = String(localized: "search.commandFinished")
                 }
             } catch let error as IpatoolError {
                 self.activeError = error
@@ -121,14 +123,12 @@ private extension SearchViewModel {
             .filter { artworkCache[$0] == nil }
         guard !missingIDs.isEmpty else { return }
 
-        Task.detached { [weak self] in
+        Task { [weak self] in
             guard let self else { return }
             do {
                 let map = try await LookupService.lookupArtwork(trackIDs: missingIDs)
-                await MainActor.run {
-                    for (id, url) in map {
-                        self.artworkCache[id] = url
-                    }
+                for (id, url) in map {
+                    self.artworkCache[id] = url
                 }
             } catch {
                 // Ignore failures; icons remain placeholders.
@@ -147,20 +147,20 @@ private extension SearchViewModel {
 
     func runPurchaseCheck(for app: IpatoolApp, environment: CommandEnvironment) async {
         guard let key = purchaseKey(for: app) else { return }
-        if purchasedKeys.contains(key) || pendingPurchaseKeys.contains(key) { return }
+        // Skip if already purchased, already checking, or already checked
+        if purchasedKeys.contains(key) || pendingPurchaseKeys.contains(key) || checkedKeys.contains(key) { return }
         pendingPurchaseKeys.insert(key)
 
         await purchaseSemaphore.wait()
 
         defer {
             pendingPurchaseKeys.remove(key)
+            checkedKeys.insert(key)
             Task { await purchaseSemaphore.signal() }
         }
 
         let commands = listVersionsCommands(for: app)
         guard !commands.isEmpty else { return }
-
-        var remainingRetries = 3
 
         commandLoop: for command in commands {
             var attempt = 0
@@ -173,6 +173,7 @@ private extension SearchViewModel {
                 } catch let error as IpatoolError {
                     if case .commandFailed(let message) = error,
                        message.localizedCaseInsensitiveContains("license is required") {
+                        // Not purchased, try next command or stop
                         continue commandLoop
                     }
                     attempt += 1
@@ -186,21 +187,9 @@ private extension SearchViewModel {
                     }
                 }
             }
-
-            remainingRetries -= 1
-            if remainingRetries <= 0 { break }
         }
-
-        if remainingRetries <= 0 {
-            await MainActor.run {
-                activeError = .commandFailed("Couldn't verify ownership. Check your network connection and try again.")
-            }
-        } else {
-            Task { [weak self] in
-                try? await Task.sleep(nanoseconds: 2_000_000_000)
-                await self?.runPurchaseCheck(for: app, environment: environment)
-            }
-        }
+        // Check completed - app is either not purchased or check failed
+        // No need to retry or show error for individual items
     }
 
     func purchaseKey(for app: IpatoolApp) -> String? {

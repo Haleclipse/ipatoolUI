@@ -11,12 +11,12 @@ final class VersionMetadataViewModel: ObservableObject {
 
     func fetch(using environment: CommandEnvironment) {
         guard !externalVersionID.trimmingCharacters(in: .whitespaces).isEmpty else {
-            activeError = .invalidInput("External version identifier is required.")
+            activeError = .invalidInput(String(localized: "metadata.provideVersionId"))
             return
         }
 
         guard validateInput() else {
-            activeError = .invalidInput("Provide an app ID or bundle identifier.")
+            activeError = .invalidInput(String(localized: "metadata.provideAppIdOrBundle"))
             return
         }
 

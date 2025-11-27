@@ -15,15 +15,15 @@ enum Feature: String, CaseIterable, Identifiable {
 
     var title: String {
         switch self {
-        case .auth: return "Authentication"
-        case .search: return "Search"
-        case .purchase: return "Purchase"
-        case .listVersions: return "Versions"
-        case .download: return "Download"
-        case .metadata: return "Version Metadata"
-        case .logs: return "Logs"
-        case .settings: return "Settings"
-        case .about: return "About"
+        case .auth: return String(localized: "feature.auth")
+        case .search: return String(localized: "feature.search")
+        case .purchase: return String(localized: "feature.purchase")
+        case .listVersions: return String(localized: "feature.versions")
+        case .download: return String(localized: "feature.download")
+        case .metadata: return String(localized: "feature.metadata")
+        case .logs: return String(localized: "feature.logs")
+        case .settings: return String(localized: "feature.settings")
+        case .about: return String(localized: "feature.about")
         }
     }
 

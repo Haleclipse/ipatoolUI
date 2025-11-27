@@ -6,10 +6,10 @@ struct LogsView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             HStack {
-                Text("Recent Commands")
+                Text("logs.recentCommands")
                     .font(.title3)
                 Spacer()
-                Button("Clear", action: clear)
+                Button(String(localized: "common.clear"), action: clear)
                     .disabled(appState.commandLogger.entries.isEmpty)
             }
 
@@ -23,10 +23,10 @@ struct LogsView: View {
                             .font(.caption)
                             .foregroundStyle(.secondary)
                     }
-                    Text(entry.success ? "Success" : "Failure (code \(entry.exitCode))")
+                    Text(entry.success ? String(localized: "logs.success") : String(localized: "logs.failure \(entry.exitCode)"))
                         .foregroundStyle(entry.success ? .green : .red)
                     if !entry.stdout.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        DisclosureGroup("Output") {
+                        DisclosureGroup(String(localized: "logs.output")) {
                             ScrollView {
                                 Text(entry.stdout)
                                     .font(.system(.footnote, design: .monospaced))
@@ -36,7 +36,7 @@ struct LogsView: View {
                         }
                     }
                     if !entry.stderr.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        DisclosureGroup("Errors") {
+                        DisclosureGroup(String(localized: "logs.errors")) {
                             ScrollView {
                                 Text(entry.stderr)
                                     .font(.system(.footnote, design: .monospaced))

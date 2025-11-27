@@ -11,13 +11,13 @@ struct SearchView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            GroupBox("Search") {
+            GroupBox(String(localized: "search.title")) {
                 VStack(alignment: .leading) {
-                    TextField("Search term", text: $viewModel.term)
+                    TextField(String(localized: "search.searchTerm"), text: $viewModel.term)
                         .textFieldStyle(.roundedBorder)
                         .onSubmit(search)
                     HStack {
-                        Text("Limit: \(Int(viewModel.limit))")
+                        Text("search.limit \(Int(viewModel.limit))")
                         Slider(value: $viewModel.limit, in: 1...25, step: 1)
                             .frame(maxWidth: 200)
                         Spacer()
@@ -26,7 +26,7 @@ struct SearchView: View {
                                 ProgressView()
                                     .controlSize(.small)
                             } else {
-                                Label("Search", systemImage: "magnifyingglass")
+                                Label(String(localized: "common.search"), systemImage: "magnifyingglass")
                             }
                         }
                         .buttonStyle(.borderedProminent)
@@ -56,7 +56,7 @@ struct SearchView: View {
 
                     VStack(alignment: .leading, spacing: 4) {
                         HStack {
-                            Text(app.name ?? "Unknown")
+                            Text(app.name ?? String(localized: "common.unknown"))
                                 .font(.headline)
                             Spacer()
                             if let price = app.price {
@@ -69,23 +69,23 @@ struct SearchView: View {
                             .foregroundStyle(.secondary)
                         HStack {
                             if let version = app.version {
-                                Text("Version \(version)")
+                                Text("search.version \(version)")
                                     .font(.caption)
                             }
                             if let trackID = app.trackID {
-                                Text("ID: \(trackID)")
+                                Text("search.id \(trackID)")
                                     .font(.caption)
                                     .foregroundStyle(.secondary)
                             }
                             Spacer()
                             if let bundleID = app.bundleID {
-                                Button("Copy Bundle ID") {
+                                Button(String(localized: "search.copyBundleId")) {
                                     copyToPasteboard(bundleID)
                                 }
                                 .buttonStyle(.bordered)
                             }
                             if viewModel.isPurchased(app: app) {
-                                Text("Purchased")
+                                Text("search.purchased")
                                     .font(.caption.bold())
                                     .padding(.horizontal, 10)
                                     .padding(.vertical, 4)
@@ -95,7 +95,7 @@ struct SearchView: View {
                                 ProgressView()
                                     .controlSize(.small)
                             } else {
-                                Button("Purchase") {
+                                Button(String(localized: "search.purchase")) {
                                     viewModel.purchase(bundleID: app.bundleID, environment: appState.environmentSnapshot())
                                 }
                                 .buttonStyle(.bordered)
@@ -104,7 +104,7 @@ struct SearchView: View {
                     }
                 }
                 .padding(.vertical, 4)
-                .task {
+                .task(id: app.id) {
                     await viewModel.ensurePurchaseStatus(for: app, environment: appState.environmentSnapshot())
                 }
             }

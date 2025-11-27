@@ -6,8 +6,8 @@ struct PurchaseView: View {
 
     var body: some View {
         Form {
-            Section("App") {
-                TextField("Bundle Identifier", text: $viewModel.bundleIdentifier)
+            Section(String(localized: "purchase.app")) {
+                TextField(String(localized: "purchase.bundleIdentifier"), text: $viewModel.bundleIdentifier)
                     .textFieldStyle(.roundedBorder)
             }
 
@@ -16,7 +16,7 @@ struct PurchaseView: View {
                     if viewModel.isProcessing {
                         ProgressView()
                     } else {
-                        Label("Purchase License", systemImage: "checkmark.seal")
+                        Label(String(localized: "purchase.purchaseLicense"), systemImage: "checkmark.seal")
                     }
                 }
                 .buttonStyle(.borderedProminent)
@@ -24,14 +24,14 @@ struct PurchaseView: View {
             }
 
             if let status = viewModel.statusMessage {
-                Section("Status") {
+                Section(String(localized: "common.status")) {
                     Text(status)
                         .font(.callout)
                 }
             }
 
             if let error = viewModel.activeError {
-                Section("Error") {
+                Section(String(localized: "common.error")) {
                     switch error {
                     case .executableNotFound:
                         InstallIpatoolHintView()

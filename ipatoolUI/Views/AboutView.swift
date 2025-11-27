@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct AboutView: View {
-    private let repoURL = URL(string: "https://github.com/majd/ipatool")!
+    private let ipatoolUIRepoURL = URL(string: "https://github.com/Haleclipse/ipatoolUI")!
+    private let ipatoolRepoURL = URL(string: "https://github.com/majd/ipatool")!
 
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
@@ -9,18 +10,23 @@ struct AboutView: View {
                 .font(.system(size: 64))
                 .foregroundStyle(.blue)
 
-            Text("About ipatool UI")
+            Text("about.title")
                 .font(.largeTitle)
                 .bold()
 
-            Text("ipatool UI wraps the open-source ipatool CLI to make App Store searches, downloads, and purchases easier on macOS.")
+            Text("about.description")
                 .font(.body)
 
             VStack(alignment: .leading, spacing: 8) {
-                Text("Credits")
+                Text("about.credits")
                     .font(.headline)
-                Text("All CLI functionality is provided by the ipatool project. Consider starring the repository or contributing fixes upstream.")
-                Link("View ipatool on GitHub", destination: repoURL)
+                Text("about.creditsDescription")
+                Link(String(localized: "about.viewIpatoolOnGitHub"), destination: ipatoolRepoURL)
+                    .font(.body.weight(.semibold))
+            }
+
+            VStack(alignment: .leading, spacing: 8) {
+                Link(String(localized: "about.viewIpatoolUIOnGitHub"), destination: ipatoolUIRepoURL)
                     .font(.body.weight(.semibold))
             }
 

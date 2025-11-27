@@ -10,7 +10,7 @@ final class PurchaseViewModel: ObservableObject {
     func purchase(using environment: CommandEnvironment) {
         let bundleID = bundleIdentifier.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !bundleID.isEmpty else {
-            activeError = .invalidInput("Bundle identifier is required.")
+            activeError = .invalidInput(String(localized: "purchase.missingBundleId"))
             return
         }
 
@@ -24,9 +24,9 @@ final class PurchaseViewModel: ObservableObject {
                 let result = try await environment.service.execute(subcommand: ["purchase", "--bundle-identifier", bundleID], environment: environment)
                 let payload: StatusLogEvent = try environment.service.decodeEvent(StatusLogEvent.self, from: result.stdout)
                 if payload.success == true {
-                    self.statusMessage = "License obtained for \(bundleID)."
+                    self.statusMessage = String(localized: "purchase.succeeded \(bundleID)")
                 } else {
-                    self.statusMessage = "Command finished."
+                    self.statusMessage = String(localized: "search.commandFinished")
                 }
             } catch let error as IpatoolError {
                 self.activeError = error
